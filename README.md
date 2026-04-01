@@ -3,7 +3,7 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 
 ## 🚀 Tecnologias
 - **Java 21 LTS** (versão mais recente)
-- Spring Boot 3.5.13(SNAPSHOT)
+- Spring Boot 3.5.13 (SNAPSHOT)
 - Spring Web
 - Spring Data JPA
 - H2 Database
@@ -32,5 +32,5 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Profile: development
 
 ## 👨‍💻 Desenvolvedor
-[Gustavo de Lima] - [04018 - ARQUITETURA DE SISTEMAS]
+Gustavo de Lima - ARQUITETURA DE SISTEMAS \
 Desenvolvido com JDK 21 e Spring Boot 3.5.13(SNAPSHOT)
