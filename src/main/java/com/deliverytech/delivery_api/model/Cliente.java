@@ -1,5 +1,9 @@
 package com.deliverytech.delivery_api.model;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,15 +14,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @Entity
-@Table(name = "cliente")
+@Table(name="cliente")
 public class Cliente {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
@@ -31,6 +33,6 @@ public class Cliente {
 
     private Boolean ativo;
 
-    @OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY)
-    private List<Pedido> pedidos;
+    @OneToMany(mappedBy = "cliente", fetch=FetchType.LAZY)
+    private List<Pedido> pedidos = new ArrayList<>();
 }

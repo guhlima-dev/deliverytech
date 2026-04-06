@@ -1,5 +1,9 @@
 package com.deliverytech.delivery_api.model;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -10,15 +14,12 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "restaurantes")
+@Table(name = "restaurante")
 public class Restaurante {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,11 +34,11 @@ public class Restaurante {
 
     private BigDecimal avaliacao;
 
-    private Boolean ativo;
+    private boolean ativo;
 
-    @OneToMany(mappedBy = "restaurante")
+    @OneToMany(mappedBy= "restaurante", fetch=FetchType.LAZY)
     private List<Produto> produtos = new ArrayList<>();
 
-    @OneToMany(mappedBy = "restaurante")
+    @OneToMany(mappedBy= "restaurante", fetch=FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
 }

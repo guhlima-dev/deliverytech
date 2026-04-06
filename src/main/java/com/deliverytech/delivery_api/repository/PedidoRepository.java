@@ -1,12 +1,22 @@
 package com.deliverytech.delivery_api.repository;
 
-import com.deliverytech.delivery_api.model.Pedido;
-import com.deliverytech.delivery_api.model.StatusPedido;
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import java.util.List;
 
+import com.deliverytech.delivery_api.model.Pedido;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.deliverytech.delivery_api.dto.VendasPorRestauranteDTO;
+
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
-    List<Pedido> findByClienteId(Long clienteId);
-    List<Pedido> findByStatus(StatusPedido status);
+
+    @Query("""
+        SELECT 
+            r.nome AS nomeRestaurante,
+            SUM(p.valorTotal) AS totalVendas
+        FROM Pedido p
+        JOIN p.restaurante r
+        GROUP BY r.nome
+    """)
+    List<VendasPorRestauranteDTO> buscarVendasPorRestaurante();
 }

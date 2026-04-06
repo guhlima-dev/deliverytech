@@ -1,7 +1,6 @@
 package com.deliverytech.delivery_api.controller;
 
-import com.deliverytech.delivery_api.model.Cliente;
-import com.deliverytech.delivery_api.service.ClienteService;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,19 +11,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.deliverytech.delivery_api.model.Cliente;
+import com.deliverytech.delivery_api.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
 public class ClienteController {
     private ClienteService service;
 
-    public ClienteController (ClienteService service){
+    public ClienteController ( ClienteService service){
         this.service = service;
     }
 
     @PostMapping("/cadastrar")
-    public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cliente){
+    public ResponseEntity<Cliente> cadastrar(@RequestBody Cliente cliente ){
         return ResponseEntity.status(201).body(service.cadastrar(cliente));
     }
 
@@ -33,19 +33,21 @@ public class ClienteController {
         return service.listarAtivos();
     }
 
+
     @GetMapping("/{id}")
     public Cliente buscarPorId(@PathVariable Long id){
         return service.buscarPorId(id);
     }
 
-    @PutMapping("/{id}/inativar-clientes")
+    @PutMapping("/{id}/inativar-cliente")
     public void inativar(@PathVariable Long id){
         service.inativar(id);
     }
 
     @PutMapping("/{id}/atualizar-dados-clientes")
-    public Cliente atulizar(@PathVariable long id, @RequestBody Cliente dados){
+    public Cliente atualizar(@PathVariable Long id, @RequestBody Cliente dados){
         return service.atualizar(id, dados);
     }
- }
 
+
+}
