@@ -11,7 +11,7 @@ import com.deliverytech.delivery_api.dto.VendasPorRestauranteDTO;
 public interface PedidoRepository extends JpaRepository<Pedido, Long> {
 
     @Query("""
-        SELECT 
+        SELECT
             r.nome AS nomeRestaurante,
             SUM(p.valorTotal) AS totalVendas
         FROM Pedido p

@@ -1,6 +1,5 @@
 package com.deliverytech.delivery_api.model;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,4 +34,8 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente", fetch=FetchType.LAZY)
     private List<Pedido> pedidos = new ArrayList<>();
+
+    public Boolean isAtivo(){
+        return ativo;
+    }
 }

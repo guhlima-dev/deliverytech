@@ -18,6 +18,8 @@ import com.deliverytech.delivery_api.repository.ItemPedidoRepository;
 import com.deliverytech.delivery_api.repository.PedidoRepository;
 import com.deliverytech.delivery_api.repository.ProdutoRepository;
 import com.deliverytech.delivery_api.repository.RestauranteRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 @Configuration
 public class DataLoader {
@@ -72,8 +74,9 @@ public class DataLoader {
             boolean existe = clienteRepository.existsByEmail("mariana@gmail.com");
             System.out.println("Existe Maria? " + existe);
 
+            Pageable pageable = PageRequest.of(0, 10);
             System.out.println("> Clientes ativos:");
-            clienteRepository.findByAtivoTrue()
+            clienteRepository.findByAtivoTrue(pageable)
                     .forEach(c -> System.out.println(c.getNome()));
 
             System.out.println("=====Inserindo Restaurante ======");
