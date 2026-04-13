@@ -3,14 +3,16 @@ package com.deliverytech.delivery_api.config;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.deliverytech.delivery_api.model.Pedido;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import com.deliverytech.delivery_api.enums.StatusPedido;
 import com.deliverytech.delivery_api.model.Cliente;
 import com.deliverytech.delivery_api.model.ItemPedido;
+import com.deliverytech.delivery_api.model.Pedido;
 import com.deliverytech.delivery_api.model.Produto;
 import com.deliverytech.delivery_api.model.Restaurante;
 import com.deliverytech.delivery_api.repository.ClienteRepository;
@@ -18,8 +20,6 @@ import com.deliverytech.delivery_api.repository.ItemPedidoRepository;
 import com.deliverytech.delivery_api.repository.PedidoRepository;
 import com.deliverytech.delivery_api.repository.ProdutoRepository;
 import com.deliverytech.delivery_api.repository.RestauranteRepository;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 @Configuration
 public class DataLoader {
@@ -37,24 +37,24 @@ public class DataLoader {
 
 
             Cliente c1 = new Cliente();
-            c1.setNome("Gustavo Lima");
-            c1.setEmail("gustavo@gmail.com");
-            c1.setTelefone("12 99999-9999");
+            c1.setNome("João Freitas");
+            c1.setEmail("joao@gmail.com");
+            c1.setTelefone("119999-8888");
             c1.setEndereco("av 1, 111");
             c1.setAtivo(true);
 
             Cliente c2 = new Cliente();
-            c2.setNome("Julia Santos");
-            c2.setEmail("julia@gmail.com");
-            c2.setTelefone("12 99999-8888");
+            c2.setNome("Mariana Freitas");
+            c2.setEmail("mariana@gmail.com");
+            c2.setTelefone("119999-7777");
             c2.setEndereco("av 2, 222");
             c2.setAtivo(true);
 
 
             Cliente c3 = new Cliente();
-            c3.setNome("João Silva");
-            c3.setEmail("joao@gmail.com");
-            c3.setTelefone("12 9999-7777");
+            c3.setNome("Joanna Silva");
+            c3.setEmail("joanna@");
+            c3.setTelefone("119999-7777");
             c3.setEndereco("av 3, 333");
             c3.setAtivo(true);
 
@@ -82,10 +82,10 @@ public class DataLoader {
             System.out.println("=====Inserindo Restaurante ======");
 
             Restaurante r1 = new Restaurante();
-            r1.setNome("Pizza Top");
-            r1.setCategoria("Pizzaria");
+            r1.setNome("pizza Top");
+            r1.setCategoria("pizzaria");
             r1.setEndereco("Rua um, 111");
-            r1.setTelefone("12 99999-1111");
+            r1.setTelefone("11 9999-1111");
             r1.setAvaliacao(new BigDecimal(4.5));
             r1.setAtivo(true);
 
@@ -93,7 +93,7 @@ public class DataLoader {
             r2.setNome("Burger House");
             r2.setCategoria("Hamburgueria");
             r2.setEndereco("Rua dois, 222");
-            r2.setTelefone("11 99999-2222");
+            r2.setTelefone("11 9999-2222");
             r2.setAvaliacao(new BigDecimal(4.2));
             r2.setAtivo(true);
 
@@ -103,19 +103,19 @@ public class DataLoader {
 
             System.out.println("> Buscar Restaurante por Categoria:");
 
-            restauranteRepository.findByCategoria("Hamburgueria")
-                    .forEach(c -> System.out.println("Restaurante(Hamburgueria): " + c.getNome()));
+            /* restauranteRepository.findByCategoria("Hamburgueria")
+            .forEach(c -> System.out.println("Restaurante(Hamburgueria): " + c.getNome()));
 
             System.out.println("> Restaurantes ativos:");
             restauranteRepository.findByAtivoTrue()
-                    .forEach(r -> System.out.println(r.getNome()));
+                .forEach(r -> System.out.println(r.getNome())); */
 
             System.out.println("=====Inserindo Produtos ======");
 
             Produto p1 = new Produto();
             p1.setNome("Pizza de calabresa");
             p1.setDescricao("Pizza de calabresa com queijo");
-            p1.setPreco(new BigDecimal("44.99"));
+            p1.setPreco(new BigDecimal("40.00"));
             p1.setCategoria("Pizza");
             p1.setDisponivel(true);
             p1.setRestaurante(r1);
@@ -131,7 +131,7 @@ public class DataLoader {
             Produto p3 = new Produto();
             p3.setNome("Pizza de Quatro Queijo");
             p3.setDescricao("Pizza com quatro tipos de queijos");
-            p3.setPreco(new BigDecimal("49.99"));
+            p3.setPreco(new BigDecimal("50.00"));
             p3.setCategoria("Pizza");
             p3.setDisponivel(true);
             p3.setRestaurante(r1);
@@ -140,7 +140,7 @@ public class DataLoader {
             Produto p4 = new Produto();
             p4.setNome("X-Burger");
             p4.setDescricao("Hambúrguer tradicional");
-            p4.setPreco(new BigDecimal("24.99"));
+            p4.setPreco(new BigDecimal("25.00"));
             p4.setCategoria("Lanche");
             p4.setDisponivel(true);
             p4.setRestaurante(r2);

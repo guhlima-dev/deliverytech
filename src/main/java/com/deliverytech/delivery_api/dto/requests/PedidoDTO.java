@@ -1,6 +1,5 @@
 package com.deliverytech.delivery_api.dto.requests;
 
-import com.deliverytech.delivery_api.dto.ItemPedidoDTO;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
