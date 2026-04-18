@@ -39,7 +39,6 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long> {
             @Param("fim") LocalDateTime fim
     );
 
-    // CORRIGIDO: Usando projeção com interface (não precisa de 'new')
     @Query("""
             SELECT r.nome AS nomeRestaurante,
                    COALESCE(SUM(ip.subtotal), 0) AS totalVendas

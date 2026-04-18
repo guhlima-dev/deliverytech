@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 import com.deliverytech.delivery_api.dto.requests.ClienteDTO;
 import com.deliverytech.delivery_api.dto.responses.ClienteReponseDTO;
 import com.deliverytech.delivery_api.dto.responses.PagedResponse;
+import com.deliverytech.delivery_api.model.Usuario;
 import com.deliverytech.delivery_api.service.ClienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,8 +32,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/clientes")
 @Tag(name = "Clientes", description = "Endpoints para gerencimentos de clientes.")
 public class ClienteController {
-    private ClienteService service;
 
+    private ClienteService service;
     public ClienteController ( ClienteService service){
         this.service = service;
     }
@@ -44,8 +46,8 @@ public class ClienteController {
             }
     )
     @PostMapping("/cadastrar")
-    public ResponseEntity<ClienteReponseDTO> cadastrar(@Valid @RequestBody ClienteDTO dto ){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(dto));
+    public ResponseEntity<ClienteReponseDTO> cadastrar(@Valid @RequestBody ClienteDTO dto, @AuthenticationPrincipal Usuario usuarioLogado){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(dto, usuarioLogado));
     }
 
     @Operation(summary = "Listar clientes ativos.")
@@ -88,6 +90,7 @@ public class ClienteController {
         return service.inativar(id);
     }
 
+    @Operation(summary = "Atualizar dados do cliente")
     @PutMapping("/{id}/atualizar-dados-clientes")
     public ClienteReponseDTO atualizar(@PathVariable Long id, ClienteDTO dto){
         return service.atualizar(id, dto);

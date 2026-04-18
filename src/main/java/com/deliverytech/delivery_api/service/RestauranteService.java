@@ -2,6 +2,7 @@ package com.deliverytech.delivery_api.service;
 
 import java.math.BigDecimal;
 
+import com.deliverytech.delivery_api.enums.CategoriaRestaurante;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,7 +33,10 @@ public class RestauranteService {
             throw new BusinessException("Restaurante com esse nome já cadastrado.");
         }
 
+        CategoriaRestaurante categoriaEnum = CategoriaRestaurante.valueOf(dto.getCategoria().toUpperCase());
+
         Restaurante r = mapper.map(dto, Restaurante.class);
+        r.setCategoria(categoriaEnum);
         r.setAtivo(true);
         r.setAvaliacao(BigDecimal.ZERO);
 
@@ -46,6 +50,14 @@ public class RestauranteService {
     }
 
     public Page<RestauranteResponseDTO> buscarPorCategoria(String categoria, Pageable pageable) {
+
+        CategoriaRestaurante categoriaEnum;
+
+        try {
+            categoriaEnum = CategoriaRestaurante.valueOf(categoria.toUpperCase());
+        }catch (IllegalArgumentException e){
+            throw new BusinessException("Categoria invávlida");
+        }
         return repository.findByCategoriaAndAtivoTrue(categoria, pageable)
                 .map(r -> mapper.map(r, RestauranteResponseDTO.class));
     }

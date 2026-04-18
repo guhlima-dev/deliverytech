@@ -6,7 +6,9 @@ Sistema de delivery desenvolvido com Spring Boot e Java 21.
 - Spring Boot 3.5.13 (SNAPSHOT)
 - Spring Web
 - Spring Data JPA
+- Spring Security
 - H2 Database
+- Swagger
 - Maven
 
 ## ⚡ Recursos Modernos Utilizados

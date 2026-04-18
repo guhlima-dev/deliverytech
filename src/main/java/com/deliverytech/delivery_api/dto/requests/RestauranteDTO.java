@@ -1,5 +1,6 @@
 package com.deliverytech.delivery_api.dto.requests;
 
+import com.deliverytech.delivery_api.validation.CategoriaValid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -17,9 +18,10 @@ public class RestauranteDTO {
     private String nome;
 
     @NotBlank(message = "Categoria é obrigatória")
+    @CategoriaValid
     private String categoria;
 
-    @Size(min = 5, max = 255, message = "Endereço deve ter entre 5 e 255 caracteres")
+    @Size(min = 5, max = 255, message = "Endereço deve ter entre 5 a 255 caracteres")
     private String endereco;
 
     @NotBlank(message = "Telefone é obrigatório")
