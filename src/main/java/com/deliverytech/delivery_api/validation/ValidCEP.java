@@ -1,6 +1,6 @@
 package com.deliverytech.delivery_api.validation;
 
-import com.deliverytech.delivery_api.validation.validator.TelefoneValidator;
+import com.deliverytech.delivery_api.validation.validator.CepValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 
@@ -11,12 +11,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 @Documented
-@Constraint(validatedBy = TelefoneValidator.class)
+@Constraint(validatedBy = CepValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ValidTelefone {
+public @interface ValidCEP {
 
-    String message() default "Telefone Inválida";
+    String message() default "CEP Inválido";
     Class<?>[] groups() default{};
     Class<? extends Payload>[] payload() default{};
 }

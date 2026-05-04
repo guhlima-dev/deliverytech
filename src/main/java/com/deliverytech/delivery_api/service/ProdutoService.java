@@ -1,6 +1,7 @@
 package com.deliverytech.delivery_api.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,6 +53,7 @@ public class ProdutoService {
         return returnResponseDTO(produtoRepository.save(novoProduto));
     }
 
+    @Cacheable("produtoPorRestaurante")
     public Page<ProdutoResponseDTO> listarPorRestaurante(Long restauranteId, Pageable pageable) {
         if (!restauranteRepository.existsById(restauranteId)) {
             throw new EntityNotFoundException("Restaurante não localizado.");

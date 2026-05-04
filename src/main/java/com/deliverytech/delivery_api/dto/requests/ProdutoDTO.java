@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 public class ProdutoDTO {
 
     @NotBlank(message = "Nome é obrigatório")
+    @Size(min = 1, max = 50)
     private String nome;
 
     @NotBlank(message = "Descrição é obrigatória")

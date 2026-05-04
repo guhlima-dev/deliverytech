@@ -46,8 +46,11 @@ public class ClienteController {
             }
     )
     @PostMapping("/cadastrar")
-    public ResponseEntity<ClienteReponseDTO> cadastrar(@Valid @RequestBody ClienteDTO dto, @AuthenticationPrincipal Usuario usuarioLogado){
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(dto, usuarioLogado));
+    public ResponseEntity<ClienteReponseDTO> cadastrar(
+            @Valid @RequestBody ClienteDTO dto,
+            @AuthenticationPrincipal(expression = "username") String email){
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.cadastrar(dto, email));
     }
 
     @Operation(summary = "Listar clientes ativos.")

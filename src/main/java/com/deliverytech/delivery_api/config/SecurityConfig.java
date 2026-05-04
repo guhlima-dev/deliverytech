@@ -28,9 +28,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        http
-
-                .csrf(csrf -> csrf.disable())
+        http.csrf(csrf -> csrf.disable())
 
                 .sessionManagement(sm ->
                         sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -48,10 +46,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/login", "/api/auth/register").permitAll()
                         .requestMatchers("/api/auth/me").authenticated()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                        .requestMatchers("/custom-health", "/custom-info").permitAll()
+                        .requestMatchers("/actuator/**").permitAll()
 
                         .requestMatchers(HttpMethod.GET, "/api/restaurantes/**").permitAll()
-                        .requestMatchers(HttpMethod.PATCH, "/api/restaurantes/**")
-                        .hasAnyRole("ADMIN", "RESTAURANTE")
+                        .requestMatchers(HttpMethod.PATCH, "/api/restaurantes/**").hasAnyRole("ADMIN", "RESTAURANTE")
 
                         .requestMatchers(HttpMethod.GET, "/api/clientes/**").hasRole("ADMIN")
                         .requestMatchers(HttpMethod.POST,"/api/clientes/cadastrar").hasAnyRole("ADMIN", "CLIENTE")

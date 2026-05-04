@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Constraint(validatedBy = CategoriaValidator.class)
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface CategoriaValid {
+public @interface ValidCategoria {
 
     String message() default "Categoria inválida";
     Class<?>[] groups() default{};

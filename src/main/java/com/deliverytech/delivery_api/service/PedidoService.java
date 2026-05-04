@@ -28,21 +28,12 @@ import com.deliverytech.delivery_api.repository.RestauranteRepository;
 
 @Service
 public class PedidoService {
-    @Autowired
+
     private PedidoRepository pedidoRepository;
-
-    @Autowired
     private ClienteRepository clienteRepository;
-
-    @Autowired
     private RestauranteRepository restauranteRepository;
-
-    @Autowired
     private ItemPedidoRepository itemPedidoRepository;
-
-    @Autowired
     private ProdutoRepository produtoRepository;
-
     private final ModelMapper mapper;
 
     private PedidoResponseDTO toResponseDTO(Pedido pedido){
@@ -154,6 +145,10 @@ public class PedidoService {
         pedido.setStatus(StatusPedido.CANCELANDO);
         Pedido salvo = pedidoRepository.save(pedido);
         return toResponseDTO(salvo);
+    }
+
+    public void processarPedido(){
+
     }
 
     /* public ItemPedido adicionarItem(Long pedidoId, Long produtoId, Integer quantidade){

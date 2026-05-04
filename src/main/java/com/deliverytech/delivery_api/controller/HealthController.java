@@ -1,5 +1,8 @@
 package com.deliverytech.delivery_api.controller;
 
+import com.deliverytech.delivery_api.metrics.PedidoMetrics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -9,8 +12,27 @@ import java.util.Map;
 @RestController
 public class HealthController {
 
-    @GetMapping("/health")
+    private static final Logger log = LoggerFactory.getLogger(HealthController.class);
+    private final PedidoMetrics pedidoMetrics;
+
+    public HealthController(PedidoMetrics pedidoMetrics){
+        this.pedidoMetrics = pedidoMetrics;
+    }
+
+    @GetMapping("/custom-health")
     public Map<String, String> health() {
+        log.info("Endpoint {} chamado ás {}", "/custom-health", LocalDateTime.now());
+
+        pedidoMetrics.inclementarPedidos();
+        pedidoMetrics.pedidosAprovado();
+        pedidoMetrics.pedidosCancelado();
+        pedidoMetrics.medirTempo(()->{
+            try {
+                Thread.sleep(200);
+            }catch(InterruptedException e){
+                Thread.currentThread().interrupt();
+            }
+        });
         return Map.of(
                 "status", "UP",
                 "timestamp", LocalDateTime.now().toString(),
@@ -19,7 +41,7 @@ public class HealthController {
         );
     }
 
-    @GetMapping("/info")
+    @GetMapping("/custom-info")
     public AppInfo info() {
         return new AppInfo(
                 "Delivery Tech Api",
